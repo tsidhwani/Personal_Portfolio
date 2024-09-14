@@ -6,7 +6,7 @@
 .main {
     color: antiquewhite;
     font-family: 'kanit', sans-serif;
-    background: linear-gradient(to right, #5570b4, #6a3380);
+    background: linear-gradient(to right, #000063, #000051);
 
 }
 
@@ -15,7 +15,7 @@
     margin-top: 0px;
     margin-bottom: 0px;
 
-    background: linear-gradient(to right, #7ee5f0, #6136cf,#453aa5, #c100be);
+    background: linear-gradient(to right, #c100be, #453aa5,#427fe7, #48c0ec);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 
