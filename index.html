@@ -32,22 +32,20 @@
                     { icon: "fas fa-code", title: "Software Development", description: "Crafting full-stack solutions and tools using Python, Java, and C++ with a focus on efficiency and user experience." },
                     { icon: "fas fa-handshake", title: "Strategic Partnerships", description: "Connecting with industry leaders to build relationships and secure funding, as demonstrated by raising $25k for VandyHacks." }
                 ],
-                // NEW Hobbies section
                 hobbies: [
                     { icon: "fas fa-football-ball", title: "Sports", description: "From varsity soccer and tennis to poker and fantasy football, I thrive on competition and teamwork." },
                     { icon: "fas fa-hiking", title: "Hiking", description: "I enjoy exploring trails and the outdoors, finding balance and perspective away from the screen." },
-                    { icon: "fas fa-utensils", title: "Cooking", description: "Experimenting with new recipes and cuisines is one of my favorite creative outlets." }
+                    { icon: "fas fa-utensils", title: "Cooking", description: "Experimenting with new recipes and cuisines is one of my favorite creative outlets." },
+                    { icon: "fas fa-music", title: "Music", description: "I'm an avid listener of various genres and enjoy playing the piano as a creative outlet." }
                 ]
             },
             
-            // UPDATED: Projects now have a 'details' object for the sub-page
             projects: [
                 {
-                    id: "project-ssda", // Unique ID for this project
+                    id: "project-ssda",
                     title: "Historical Archives AI",
                     category: "Machine Learning",
                     image: "SSDA_Screenshot.png",
-                    // Details for the case study sub-page
                     details: {
                         headerImage: "SSDA_Screenshot.png",
                         title: "Breathing Life into Historical Archives",
@@ -58,18 +56,17 @@
                             {
                                 title: "The Challenge: Deciphering History",
                                 text: "Our main obstacle was the variability and degradation of historical handwritten text. Standard OCR tools fail on such documents. We needed a custom solution to accurately segment text lines and prepare them for future transcription models.",
-                                image: "https://placehold.co/800x400/0d0d2b/b45edc?text=Code+Snippet+or+Diagram" // Replace with a real image
+                                image: "https://placehold.co/800x400/0d0d2b/b45edc?text=Code+Snippet+or+Diagram"
                             },
                             {
                                 title: "My Solution: A Custom Classifier",
                                 text: "I spearheaded the development of a classifier model that could distinguish between handwritten text, printed text, and noise. I trained this model on a dataset of over 100,000 images, fine-tuning it to achieve an 85% validation accuracy. This model served as a crucial first step in the data processing pipeline, significantly improving the quality of the data fed into subsequent analysis tools.",
-                                image: "https://placehold.co/800x400/0d0d2b/6496ec?text=Another+Project+Image" // Replace with a real image
+                                image: "https://placehold.co/800x400/0d0d2b/6496ec?text=Another+Project+Image"
                             }
                         ],
                         liveLink: "https://slavesocieties.org/"
                     }
                 },
-                // Add your other projects here in the same detailed format
                 {
                     id: "project-flowchart",
                     title: "Flow Chart Study Tool",
@@ -84,9 +81,26 @@
                         sections: [
                            { title: "The Concept", text: "The core idea was to build a tool that adapts to the user's knowledge, reinforcing concepts they struggle with while quickly moving past ones they've mastered. The binary decision tree was the perfect data structure for this."}
                         ],
-                        liveLink: null // No live link for this one
+                        liveLink: null
                     }
                 },
+                {
+                    id: "project-vandyhacks",
+                    title: "VandyHacks Sponsorship",
+                    category: "Business & Strategy",
+                    image: "https://placehold.co/800x600/0d0d2b/6496ec?text=Project+Visual",
+                    details: {
+                        headerImage: "https://placehold.co/1200x600/0d0d2b/6496ec?text=VandyHacks",
+                        title: "Fueling Innovation Through Partnerships",
+                        overview: "As a member of the VandyHacks sponsorship committee, my role was to build relationships with tech companies to secure funding for one of the largest hackathons in the South. This involved outreach, negotiation, and ensuring sponsors had a valuable experience.",
+                        role: "Sponsorship Committee Member",
+                        techStack: ["Relationship Building", "Negotiation", "Event Logistics"],
+                        sections: [
+                           { title: "The Goal", text: "Our objective was to raise over $25,000 to provide a top-tier experience for hundreds of student hackers, covering everything from food and prizes to travel reimbursements."}
+                        ],
+                        liveLink: null
+                    }
+                }
             ],
             
             volunteer: [
@@ -113,18 +127,17 @@
             </nav>
         </header>
 
-        <main>
-            <!-- Landing Page (Hero) -->
-            <section id="page-hero" class="page">
-                <div class="hero-text">
-                    <h1 id="hero-name"></h1>
-                    <p id="hero-title"></p>
-                    <a href="#" class="btn nav-link" data-page="page-work">Explore My Work</a>
-                </div>
-            </section>
-            
-            <!-- This container holds all other pages -->
-            <div class="content-pages">
+        <main id="main-content">
+            <!-- This container holds all primary pages -->
+            <div id="page-container">
+                <section id="page-hero" class="page">
+                    <div class="hero-text">
+                        <h1 id="hero-name"></h1>
+                        <p id="hero-title"></p>
+                        <a href="#" class="btn nav-link" data-page="page-work">Explore My Work</a>
+                    </div>
+                </section>
+                
                 <section id="page-work" class="page">
                     <h2>My Work</h2>
                     <div class="project-grid" id="project-list"></div>
@@ -185,8 +198,8 @@
                 </section>
             </div>
             
-            <!-- NEW: Container for Project Detail Pages -->
-            <div id="project-detail-container" class="project-detail-container">
+            <!-- This container is ONLY for the project detail view -->
+            <div id="project-detail-container">
                 <!-- Project detail content will be injected here by JS -->
             </div>
         </main>
@@ -201,30 +214,34 @@
         particlesJS("particles-js", { particles: { number: { value: 60, density: { enable: true, value_area: 800 } }, color: { value: "#48c0ec" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#6496ec", opacity: 0.4, width: 1 }, move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, retina_detect: true });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const siteContainer = document.querySelector('.site-container');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const pages = document.querySelectorAll('.page');
+            const pageContainer = document.getElementById('page-container');
             const projectDetailContainer = document.getElementById('project-detail-container');
+            const navLinks = document.querySelectorAll('.nav-link');
             const contactForm = document.getElementById('contact-form');
             const successMessage = document.getElementById('form-success-message');
 
             function showPage(pageId) {
-                projectDetailContainer.classList.remove('active'); // Always hide detail view
-                if (pageId === 'page-hero') {
-                    siteContainer.classList.remove('content-view-active');
-                } else {
-                    siteContainer.classList.add('content-view-active');
+                // Hide all main pages and the project detail page
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                projectDetailContainer.style.display = 'none';
+                pageContainer.style.display = 'block';
+
+                // Show the requested page
+                const activePage = document.getElementById(pageId);
+                if (activePage) {
+                    activePage.classList.add('active');
                 }
                 
-                pages.forEach(page => page.classList.remove('active'));
-                document.getElementById(pageId)?.classList.add('active');
-                
+                // Update nav link styles
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.dataset.page === pageId) link.classList.add('active');
                 });
+                
                 if (pageId === 'page-hero') {
                      document.querySelector('.logo.nav-link').classList.remove('active');
+                } else {
+                     document.querySelector('.logo.nav-link').classList.add('active');
                 }
             }
             
@@ -232,6 +249,9 @@
                 const project = config.projects.find(p => p.id === projectId);
                 if (!project) return;
                 
+                pageContainer.style.display = 'none'; // Hide main page container
+                projectDetailContainer.style.display = 'block'; // Show project detail container
+
                 let techStackHtml = project.details.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
                 let sectionsHtml = project.details.sections.map(section => `
                     <div class="detail-section">
@@ -240,7 +260,7 @@
                         ${section.image ? `<img src="${section.image}" alt="${section.title} detail">` : ''}
                     </div>
                 `).join('');
-
+                
                 projectDetailContainer.innerHTML = `
                     <div class="project-detail-content">
                         <button class="back-button">&larr; Back to Work</button>
@@ -259,12 +279,17 @@
                         </div>
                     </div>
                 `;
-
-                siteContainer.classList.add('content-view-active');
-                projectDetailContainer.classList.add('active');
                 
-                document.querySelector('.back-button').addEventListener('click', () => {
+                window.scrollTo(0, 0);
+
+                projectDetailContainer.querySelector('.back-button').addEventListener('click', () => {
                     showPage('page-work');
+                });
+
+                // Set 'Work' tab as active
+                 navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.page === 'page-work') link.classList.add('active');
                 });
             }
 
