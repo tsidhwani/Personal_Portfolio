@@ -13,6 +13,7 @@
 <body>
     <div id="particles-js"></div>
 
+    <!-- ================== CONFIGURATION ================== -->
     <script>
         const config = {
             name: "Tapan Sidhwani",
@@ -21,6 +22,7 @@
             github: "https://github.com/tsidhwani",
             email: "mailto:tapan.sidhwani@gmail.com",
             headshot: "TapanHeadshot.jpg",
+            resumePDF: "SidhwaniResume4-22-25.pdf", // <-- YOUR RESUME PDF FILE NAME
             
             about: {
                 story: "I'm a builder and a strategist, currently studying Computer Science at Vanderbilt. I thrive on diving deep into complex problems, whether it's developing machine learning models to decipher historical data or shaping sponsorship strategies for VandyHacks. My goal is to create technology that is not only powerful but also intuitive and impactful, bridging the gap between intricate code and real-world business challenges.",
@@ -36,39 +38,25 @@
                     title: "Historical Archives AI",
                     category: "Machine Learning",
                     description: "Breathing life into history. I helped to develop ML models that decipher handwritten text from 100,000+ historical documents, making them accessible for the first time.",
-                    image: "SSDA_Screenshot.png", // Using your provided screenshot
+                    image: "SSDA_Screenshot.png",
                     link: "https://slavesocieties.org/"
                 },
                 {
                     title: "Flow Chart Study Tool",
                     category: "Python Development",
                     description: "Rethinking study habits. I created a Python-based decision tree tool that transforms learning into an interactive experience, boosting engagement.",
-                    image: "https://placehold.co/800x600/0d0d2b/b45edc?text=Project+Visual", // Replace with an actual project image
+                    image: "https://placehold.co/800x600/0d0d2b/b45edc?text=Project+Visual",
                     link: "#"
                 },
                 {
                     title: "VandyHacks Sponsorship",
                     category: "Business & Strategy",
                     description: "Fueling innovation. I connected with industry leaders to aid in securing over $25,000 in funding, creating a space for hundreds of students to build and dream.",
-                    image: "https://placehold.co/800x600/0d0d2b/6496ec?text=Project+Visual", // Replace with an actual project image
+                    image: "https://placehold.co/800x600/0d0d2b/6496ec?text=Project+Visual",
                     link: "#"
                 }
             ],
-
-            // NEW: Content for the dedicated Resume Page
-            resume: {
-                education: [
-                    { institution: "Vanderbilt University", degree: "B.S. Computer Science, Business Minor", period: "2023 - 2027", societies: "Vanderbilt Business Review, VandyHacks, Vanderbilt Blockchain, Kappa Theta Pi" }
-                ],
-                experience: [
-                    { company: "Deep Sync", role: "Incoming Data Engineering Intern", period: "May 2025", details: ["Preparing to contribute to data engineering solutions in a professional environment."] },
-                    { company: "Slave Societies Digital Archive", role: "Machine Learning Engineer", period: "Aug 2024 - Present", details: ["Spearheaded the development and optimization of classifier machine learning models using PyTorch and SciKit-learn, improving image processing efficiency by 15%.", "Trained models on over 100,000 historical images, improving text segmentation accuracy."] },
-                    { company: "VandyHacks Board", role: "Sponsorship Committee", period: "Feb 2024 - Present", details: ["Directed sponsor events during hackathon, organizing career fair and judging contestants.", "Initiated outreach to 20+ industry recruiters, raising $25,000 in sponsorships for Fall hackathon."] },
-                ],
-                skills: ["Java", "Python", "C++", "PyTorch", "Scikit-learn", "HTML/CSS", "JavaScript", "SQL", "Git", "React", "Node.js"]
-            },
             
-            // NEW: Content for the Volunteer Page
             volunteer: [
                 { title: "Edgemont COVID Soccer Camp", role: "Founder", description: "To address a lack of local programs during the pandemic, I founded a neighborhood soccer camp. Over 8 weeks, I managed scheduling, budgeting, and coaching, raising $1,000 for Save The Children." },
                 { title: "Tapan’s Sports Equipment Drive", role: "Founder", description: "I organized a drive to collect used sports equipment from my high school peers. We packaged over 150 pounds of gear and distributed it to 3 local schools in the Dominican Republic, benefiting over 200 students." },
@@ -77,21 +65,24 @@
             ]
         };
     </script>
+    <!-- ================= END OF CONFIGURATION ================= -->
+
     <header>
         <nav>
             <a href="#" class="logo nav-link" data-page="page-hero"></a>
             <div class="nav-menu">
-                <a href="#" class="nav-link active" data-page="page-work">Work</a>
-                <a href="#" class="nav-link" data-page="page-about">About</a>
-                <a href="#" class="nav-link" data-page="page-resume">Resume</a>
+                <a href="#" class="nav-link" data-page="page-work">Work</a>
                 <a href="#" class="nav-link" data-page="page-volunteer">Volunteer</a>
+                <a href="#" class="nav-link" data-page="page-resume">Resume</a>
+                <a href="#" class="nav-link" data-page="page-about">About</a>
                 <a href="#" class="nav-link" data-page="page-contact">Contact</a>
             </div>
         </nav>
     </header>
 
     <div class="main-content">
-        <section id="page-hero" class="page">
+        <!-- Landing Page -->
+        <section id="page-hero" class="page active">
             <div class="hero-text">
                 <h1 id="hero-name"></h1>
                 <p id="hero-title"></p>
@@ -99,6 +90,7 @@
             </div>
         </section>
         
+        <!-- Other Pages -->
         <section id="page-work" class="page">
              <h2>My Work</h2>
              <div class="project-grid" id="project-list"></div>
@@ -119,10 +111,11 @@
         
         <section id="page-resume" class="page">
             <h2>Resume</h2>
-            <div class="resume-container">
-                <div class="resume-section" id="resume-experience"><h3>Experience</h3></div>
-                <div class="resume-section" id="resume-education"><h3>Education</h3></div>
-                <div class="resume-section" id="resume-skills"><h3>Skills</h3></div>
+            <div class="resume-actions">
+                <a id="download-resume-link" href="" class="btn" download>Download PDF</a>
+            </div>
+            <div class="resume-viewer-container">
+                <embed id="resume-embed" src="" type="application/pdf" width="100%" height="100%">
             </div>
         </section>
         
@@ -148,50 +141,36 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Particle.js configuration
         particlesJS("particles-js", { particles: { number: { value: 60, density: { enable: true, value_area: 800 } }, color: { value: "#48c0ec" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#6496ec", opacity: 0.4, width: 1 }, move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, retina_detect: true });
 
         document.addEventListener('DOMContentLoaded', () => {
             const mainContent = document.querySelector('.main-content');
-
-            // --- PAGE NAVIGATION LOGIC ---
             const navLinks = document.querySelectorAll('.nav-link');
             const pages = document.querySelectorAll('.page');
 
             function showPage(pageId) {
-                pages.forEach(page => {
-                    page.classList.remove('active');
-                });
-                const newPage = document.getElementById(pageId);
-                if(newPage) {
-                    newPage.classList.add('active');
-                }
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById(pageId)?.classList.add('active');
                 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if(link.dataset.page === pageId) {
+                    if (link.dataset.page === pageId) {
                         link.classList.add('active');
                     }
                 });
-
-                 // Special case for logo: don't keep it active
-                if(pageId === 'page-hero') {
-                    document.querySelector('.logo.nav-link').classList.remove('active');
-                    document.querySelector('.nav-link[data-page="page-work"]').classList.add('active');
+                if (pageId === 'page-hero') {
+                     document.querySelector('.logo.nav-link').classList.remove('active');
                 }
             }
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const pageId = link.dataset.page;
-                    showPage(pageId);
+                    showPage(link.dataset.page);
+                    window.scrollTo(0, 0);
                 });
             });
-            // Show work page by default instead of hero
-            showPage('page-work'); 
-
-
+            
             // --- POPULATE CONTENT FROM CONFIG ---
             document.querySelector('.logo').textContent = config.name;
             document.getElementById('hero-name').textContent = config.name;
@@ -202,6 +181,8 @@
             document.getElementById('linkedin-link').href = config.linkedin;
             document.getElementById('github-link').href = config.github;
             document.getElementById('footer-name').textContent = config.name;
+            document.getElementById('download-resume-link').href = config.resumePDF;
+            document.getElementById('resume-embed').src = config.resumePDF;
             
             const capabilitiesList = document.getElementById('capabilities-list');
             config.about.capabilities.forEach(cap => {
@@ -217,21 +198,9 @@
             config.volunteer.forEach(item => {
                 volunteerList.innerHTML += `<div class="volunteer-card"><h3>${item.title}</h3><span class="volunteer-role">${item.role}</span><p>${item.description}</p></div>`;
             });
-            
-            // Resume Page Population
-            const resumeExperience = document.getElementById('resume-experience');
-            config.resume.experience.forEach(exp => {
-                let detailsHtml = '<ul>' + exp.details.map(d => `<li>${d}</li>`).join('') + '</ul>';
-                resumeExperience.innerHTML += `<div class="resume-item"><h4>${exp.role}<span>${exp.company} | ${exp.period}</span></h4>${detailsHtml}</div>`;
-            });
-            
-            const resumeEducation = document.getElementById('resume-education');
-            config.resume.education.forEach(edu => {
-                resumeEducation.innerHTML += `<div class="resume-item"><h4>${edu.degree}<span>${edu.institution} | ${edu.period}</span></h4><p class="societies">Societies: ${edu.societies}</p></div>`;
-            });
-            
-            const resumeSkills = document.getElementById('resume-skills');
-            resumeSkills.innerHTML += '<div class="skills-container">' + config.resume.skills.map(s => `<span class="skill-tag">${s}</span>`).join('') + '</div>';
+
+            // Start on the hero page by default
+            showPage('page-hero'); 
         });
     </script>
 </body>
