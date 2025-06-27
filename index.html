@@ -22,7 +22,7 @@
             github: "https://github.com/tsidhwani",
             email: "mailto:tapan.sidhwani@gmail.com",
             headshot: "TapanHeadshot.jpg",
-            resumePDF: "SidhwaniResume4-22-25.pdf", // <-- YOUR RESUME PDF FILE NAME
+            resumePDF: "SidhwaniResume4-22-25.pdf", // Your resume PDF file name
             
             about: {
                 story: "I'm a builder and a strategist, currently studying Computer Science at Vanderbilt. I thrive on diving deep into complex problems, whether it's developing machine learning models to decipher historical data or shaping sponsorship strategies for VandyHacks. My goal is to create technology that is not only powerful but also intuitive and impactful, bridging the gap between intricate code and real-world business challenges.",
@@ -67,96 +67,117 @@
     </script>
     <!-- ================= END OF CONFIGURATION ================= -->
 
-    <header>
-        <nav>
-            <a href="#" class="logo nav-link" data-page="page-hero"></a>
-            <div class="nav-menu">
-                <a href="#" class="nav-link" data-page="page-work">Work</a>
-                <a href="#" class="nav-link" data-page="page-volunteer">Volunteer</a>
-                <a href="#" class="nav-link" data-page="page-resume">Resume</a>
-                <a href="#" class="nav-link" data-page="page-about">About</a>
-                <a href="#" class="nav-link" data-page="page-contact">Contact</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="main-content">
-        <!-- Landing Page -->
-        <section id="page-hero" class="page active">
-            <div class="hero-text">
-                <h1 id="hero-name"></h1>
-                <p id="hero-title"></p>
-                <a href="#" class="btn nav-link" data-page="page-work">Explore My Work</a>
-            </div>
-        </section>
-        
-        <!-- Other Pages -->
-        <section id="page-work" class="page">
-             <h2>My Work</h2>
-             <div class="project-grid" id="project-list"></div>
-        </section>
-
-        <section id="page-about" class="page">
-            <div class="about-container">
-                <div class="about-image">
-                    <img id="headshot-img" src="" alt="Headshot of Tapan Sidhwani">
+    <div class="site-container">
+        <header>
+            <nav>
+                <a href="#" class="logo nav-link" data-page="page-hero"></a>
+                <div class="nav-menu">
+                    <a href="#" class="nav-link" data-page="page-work">Work</a>
+                    <a href="#" class="nav-link" data-page="page-volunteer">Volunteer</a>
+                    <a href="#" class="nav-link" data-page="page-resume">Resume</a>
+                    <a href="#" class="nav-link" data-page="page-about">About</a>
+                    <a href="#" class="nav-link" data-page="page-contact">Contact</a>
                 </div>
-                <div class="about-text">
-                    <h2>A Bit About Me</h2>
-                    <p id="about-story"></p>
-                    <div class="capabilities" id="capabilities-list"></div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="page-resume" class="page">
-            <h2>Resume</h2>
-            <div class="resume-actions">
-                <a id="download-resume-link" href="" class="btn" download>Download PDF</a>
-            </div>
-            <div class="resume-viewer-container">
-                <embed id="resume-embed" src="" type="application/pdf" width="100%" height="100%">
-            </div>
-        </section>
-        
-        <section id="page-volunteer" class="page">
-            <h2>Community & Volunteer Work</h2>
-            <div class="volunteer-grid" id="volunteer-list"></div>
-        </section>
+            </nav>
+        </header>
 
-        <section id="page-contact" class="page">
-            <h2>Let's Connect</h2>
-            <p>Have a project in mind or just want to say hello? I'd love to hear from you.</p>
-            <div class="contact-links">
-                <a id="email-link" href="#" class="contact-button"><i class="fas fa-envelope"></i> Email</a>
-                <a id="linkedin-link" href="#" target="_blank" class="contact-button"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a id="github-link" href="#" target="_blank" class="contact-button"><i class="fab fa-github"></i> GitHub</a>
+        <main>
+            <!-- Landing Page (Hero) -->
+            <section id="page-hero" class="page">
+                <div class="hero-text">
+                    <h1 id="hero-name"></h1>
+                    <p id="hero-title"></p>
+                    <a href="#" class="btn nav-link" data-page="page-work">Explore My Work</a>
+                </div>
+            </section>
+            
+            <!-- This container holds all other pages -->
+            <div class="content-pages">
+                <section id="page-work" class="page">
+                    <h2>My Work</h2>
+                    <div class="project-grid" id="project-list"></div>
+                </section>
+
+                <section id="page-volunteer" class="page">
+                    <h2>Community & Volunteer Work</h2>
+                    <div class="volunteer-grid" id="volunteer-list"></div>
+                </section>
+
+                <section id="page-resume" class="page">
+                    <h2>Resume</h2>
+                    <div class="resume-actions">
+                        <a id="download-resume-link" href="" class="btn" download>Download PDF</a>
+                    </div>
+                    <div class="resume-viewer-container">
+                        <iframe id="resume-embed" src="" title="Tapan Sidhwani's Resume"></iframe>
+                    </div>
+                </section>
+                
+                <section id="page-about" class="page">
+                    <div class="about-container">
+                        <div class="about-image">
+                            <img id="headshot-img" src="" alt="Headshot of Tapan Sidhwani">
+                        </div>
+                        <div class="about-text">
+                            <h2>A Bit About Me</h2>
+                            <p id="about-story"></p>
+                            <div class="capabilities" id="capabilities-list"></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="page-contact" class="page">
+                    <h2>Let's Connect</h2>
+                    <p>Have a project in mind or just want to say hello? I'd love to hear from you.</p>
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                    <div id="form-success-message" style="display: none; margin-top: 1.5rem;">
+                        Thank you for your message! I'll get back to you soon.
+                    </div>
+                </section>
             </div>
-        </section>
+        </main>
+
+        <footer>
+            <p>Designed & Built by <span id="footer-name"></span></p>
+        </footer>
     </div>
-
-    <footer>
-        <p>Designed & Built by <span id="footer-name"></span></p>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", { particles: { number: { value: 60, density: { enable: true, value_area: 800 } }, color: { value: "#48c0ec" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#6496ec", opacity: 0.4, width: 1 }, move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, retina_detect: true });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const mainContent = document.querySelector('.main-content');
+            const siteContainer = document.querySelector('.site-container');
             const navLinks = document.querySelectorAll('.nav-link');
             const pages = document.querySelectorAll('.page');
 
             function showPage(pageId) {
+                if (pageId === 'page-hero') {
+                    siteContainer.classList.remove('content-view-active');
+                } else {
+                    siteContainer.classList.add('content-view-active');
+                }
+                
                 pages.forEach(page => page.classList.remove('active'));
                 document.getElementById(pageId)?.classList.add('active');
                 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.dataset.page === pageId) {
-                        link.classList.add('active');
-                    }
+                    if (link.dataset.page === pageId) link.classList.add('active');
                 });
                 if (pageId === 'page-hero') {
                      document.querySelector('.logo.nav-link').classList.remove('active');
@@ -171,18 +192,20 @@
                 });
             });
             
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                document.getElementById('form-success-message').style.display = 'block';
+                this.reset();
+            });
+
             // --- POPULATE CONTENT FROM CONFIG ---
             document.querySelector('.logo').textContent = config.name;
             document.getElementById('hero-name').textContent = config.name;
             document.getElementById('hero-title').textContent = config.jobTitle;
             document.getElementById('headshot-img').src = config.headshot;
             document.getElementById('about-story').textContent = config.about.story;
-            document.getElementById('email-link').href = config.email;
-            document.getElementById('linkedin-link').href = config.linkedin;
-            document.getElementById('github-link').href = config.github;
-            document.getElementById('footer-name').textContent = config.name;
             document.getElementById('download-resume-link').href = config.resumePDF;
-            document.getElementById('resume-embed').src = config.resumePDF;
+            document.getElementById('resume-embed').src = `${config.resumePDF}#toolbar=0&navpanes=0&scrollbar=0`;
             
             const capabilitiesList = document.getElementById('capabilities-list');
             config.about.capabilities.forEach(cap => {
@@ -200,7 +223,7 @@
             });
 
             // Start on the hero page by default
-            showPage('page-hero'); 
+            showPage('page-hero');
         });
     </script>
 </body>
