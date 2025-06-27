@@ -23,6 +23,7 @@
             email: "mailto:tapan.sidhwani@gmail.com",
             headshot: "TapanHeadshot.jpg",
             resumePDF: "SidhwaniResume4-22-25.pdf", // Your resume PDF file name
+            formspreeEndpoint: "https://formspree.io/f/your_unique_code", // <-- IMPORTANT: Replace with your Formspree endpoint
             
             about: {
                 story: "I'm a builder and a strategist, currently studying Computer Science at Vanderbilt. I thrive on diving deep into complex problems, whether it's developing machine learning models to decipher historical data or shaping sponsorship strategies for VandyHacks. My goal is to create technology that is not only powerful but also intuitive and impactful, bridging the gap between intricate code and real-world business challenges.",
@@ -129,14 +130,15 @@
                 <section id="page-contact" class="page">
                     <h2>Let's Connect</h2>
                     <p>Have a project in mind or just want to say hello? I'd love to hear from you.</p>
-                    <form id="contact-form" class="contact-form">
+                    <!-- UPDATED: Form now points to Formspree -->
+                    <form id="contact-form" class="contact-form" action="" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="_replyto" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
@@ -164,6 +166,7 @@
             const siteContainer = document.querySelector('.site-container');
             const navLinks = document.querySelectorAll('.nav-link');
             const pages = document.querySelectorAll('.page');
+            const contactForm = document.getElementById('contact-form');
 
             function showPage(pageId) {
                 if (pageId === 'page-hero') {
@@ -192,10 +195,29 @@
                 });
             });
             
-            document.getElementById('contact-form').addEventListener('submit', function(e) {
+            contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                document.getElementById('form-success-message').style.display = 'block';
-                this.reset();
+                const formData = new FormData(contactForm);
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                }).then(response => {
+                    if (response.ok) {
+                        document.getElementById('form-success-message').style.display = 'block';
+                        contactForm.style.display = 'none';
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                alert(data["errors"].map(error => error["message"]).join(", "));
+                            } else {
+                                alert('Oops! There was a problem submitting your form');
+                            }
+                        })
+                    }
+                }).catch(error => {
+                    alert('Oops! There was a problem submitting your form');
+                });
             });
 
             // --- POPULATE CONTENT FROM CONFIG ---
@@ -206,6 +228,7 @@
             document.getElementById('about-story').textContent = config.about.story;
             document.getElementById('download-resume-link').href = config.resumePDF;
             document.getElementById('resume-embed').src = `${config.resumePDF}#toolbar=0&navpanes=0&scrollbar=0`;
+            contactForm.action = config.formspreeEndpoint;
             
             const capabilitiesList = document.getElementById('capabilities-list');
             config.about.capabilities.forEach(cap => {
@@ -221,8 +244,9 @@
             config.volunteer.forEach(item => {
                 volunteerList.innerHTML += `<div class="volunteer-card"><h3>${item.title}</h3><span class="volunteer-role">${item.role}</span><p>${item.description}</p></div>`;
             });
+            
+            document.getElementById('footer-name').textContent = config.name;
 
-            // Start on the hero page by default
             showPage('page-hero');
         });
     </script>
