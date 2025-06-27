@@ -24,15 +24,10 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: bottom left; }
 .nav-link:hover, .nav-link.active { color: var(--text-color); }
 
-/* --- PAGE CONTAINER & VIEW LOGIC (BUG FIX HERE) --- */
-main { position: relative; }
+/* --- PAGE CONTAINER & VIEW LOGIC (CORRECTED) --- */
 .page { display: none; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s ease-in-out; }
 .page.active { display: block; }
-.content-pages, .project-detail-container { display: none; }
-.site-container.content-view-active #page-hero { display: none; }
-/* This is the corrected rule that makes content pages appear */
-.site-container.content-view-active .content-pages { display: block; }
-.project-detail-container.active { display: block; }
+#project-detail-container { display: none; } /* Hide detail view by default */
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -56,7 +51,8 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 .project-info h3 { font-size: clamp(2rem, 5vw, 3rem); margin: 0; color: white; line-height: 1.2; }
 
 /* --- PROJECT DETAIL (CASE STUDY) PAGE --- */
-.project-detail-container { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; animation: fadeIn 0.5s ease-in-out; }
+#project-detail-container { animation: fadeIn 0.5s ease-in-out; }
+.project-detail-content { max-width: 900px; margin: 0 auto; padding: 6rem 2rem; }
 .back-button { background: none; border: 1px solid var(--border-color); color: var(--text-color); font-family: var(--font-secondary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; margin-bottom: 2rem; transition: all 0.3s ease; }
 .back-button:hover { border-color: var(--gradient-start); color: var(--gradient-start); }
 .detail-header { width: 100%; height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; background-size: cover; background-position: center; border-radius: 12px; margin-bottom: 3rem; }
