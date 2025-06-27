@@ -47,9 +47,9 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 main { padding: 0 2rem; }
 .page { display: none; padding: 6rem 0; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s ease-in-out; }
 .page.active { display: block; }
-.content-pages { display: none; } /* Hide all content pages by default */
-.site-container.content-view-active #page-hero { display: none; } /* Hide hero when viewing content */
-.site-container.content-view-active .content-pages { display: block; } /* Show content pages container */
+.content-pages { display: none; }
+.site-container.content-view-active #page-hero { display: none; }
+.site-container.content-view-active .content-pages { display: block; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -58,6 +58,7 @@ main { padding: 0 2rem; }
 
 /* Landing Page (Hero) */
 #page-hero { min-height: calc(100vh - 90px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 90px; }
+.hero-text { display: flex; flex-direction: column; align-items: center; } /* <-- Centering fix */
 #hero-name { font-size: clamp(3rem, 10vw, 6rem); margin: 0; line-height: 1.1; font-weight: 700; background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end)); -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; }
 #hero-title { font-size: clamp(1.2rem, 3vw, 1.5rem); font-family: var(--font-secondary); color: #b1d7ff; margin: 1rem 0 2.5rem 0; max-width: 600px; }
 .btn { font-family: var(--font-secondary); text-decoration: none; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 700; transition: all 0.3s ease; border: 2px solid var(--gradient-start); color: var(--gradient-start); background: transparent; cursor: pointer; }
@@ -95,7 +96,7 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 /* --- RESUME PAGE --- */
 .resume-actions { text-align: center; margin-bottom: 2rem; }
 .resume-viewer-container { width: 100%; max-width: 850px; height: 1100px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
-#resume-embed { width: 100%; height: 100%; border: none; } /* Using iframe needs border:none */
+#resume-embed { width: 100%; height: 100%; border: none; }
 
 /* --- VOLUNTEER PAGE --- */
 .volunteer-grid { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
@@ -112,6 +113,7 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 .form-group { margin-bottom: 1.5rem; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-family: var(--font-secondary); color: #a0a0c0; }
 .form-group input, .form-group textarea {
+    box-sizing: border-box; /* Fix for padding issue */
     width: 100%;
     padding: 0.8rem;
     background-color: var(--card-bg);
@@ -127,11 +129,7 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
     border-color: var(--gradient-start);
     box-shadow: 0 0 0 3px rgba(72, 192, 236, 0.2);
 }
-#form-success-message {
-    text-align: center;
-    color: var(--gradient-start);
-    font-family: var(--font-secondary);
-}
+#form-success-message { text-align: center; color: var(--gradient-start); font-family: var(--font-secondary); }
 
 /* Footer */
 footer { text-align: center; padding: 3rem 2rem; font-family: var(--font-secondary); color: #aaa; }
