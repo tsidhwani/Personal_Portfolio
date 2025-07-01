@@ -228,7 +228,7 @@
                 projectDetailContainer.classList.remove('active');
                 pageContainer.classList.add('active');
 
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('#page-container .page').forEach(p => p.classList.remove('active'));
                 const activePage = document.getElementById(pageId);
                 if (activePage) {
                     activePage.classList.add('active');
