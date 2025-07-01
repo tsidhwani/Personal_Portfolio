@@ -23,7 +23,8 @@
             email: "mailto:tapan.sidhwani@gmail.com",
             headshot: "TapanHeadshot.jpg",
             resumePDF: "SidhwaniResume4-22-25.pdf",
-            formspreeEndpoint: "https://formspree.io/f/your_unique_code", // <-- IMPORTANT: Replace with your Formspree endpoint
+            // IMPORTANT: Replace "your_unique_code" with your actual Formspree endpoint. The form will not work otherwise.
+            formspreeEndpoint: "https://formspree.io/f/your_unique_code",
             
             about: {
                 story: "I'm a builder and a strategist, currently studying Computer Science at Vanderbilt. I thrive on diving deep into complex problems, whether it's developing machine learning models to decipher historical data or shaping sponsorship strategies for VandyHacks. My goal is to create technology that is not only powerful but also intuitive and impactful, bridging the gap between intricate code and real-world business challenges.",
@@ -132,16 +133,19 @@
         </header>
 
         <main id="main-content">
-            <!-- This container holds all primary pages -->
-            <div id="page-container" class="active">
-                <section id="page-hero" class="page">
+            <!-- Landing Page (Hero) -->
+            <div id="hero-container" class="active">
+                <section id="page-hero" class="page active">
                     <div class="hero-text">
                         <h1 id="hero-name"></h1>
                         <p id="hero-title"></p>
                         <a href="#" class="btn nav-link" data-page="page-work">Explore My Work</a>
                     </div>
                 </section>
-                
+            </div>
+            
+            <!-- This container holds all other pages -->
+            <div id="page-container">
                 <section id="page-work" class="page">
                     <h2>My Work</h2>
                     <div class="project-grid" id="project-list"></div>
@@ -218,6 +222,7 @@
         particlesJS("particles-js", { particles: { number: { value: 60, density: { enable: true, value_area: 800 } }, color: { value: "#48c0ec" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#6496ec", opacity: 0.4, width: 1 }, move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, retina_detect: true });
 
         document.addEventListener('DOMContentLoaded', () => {
+            const heroContainer = document.getElementById('hero-container');
             const pageContainer = document.getElementById('page-container');
             const projectDetailContainer = document.getElementById('project-detail-container');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -225,14 +230,19 @@
             const successMessage = document.getElementById('form-success-message');
 
             function showPage(pageId) {
+                heroContainer.classList.remove('active');
+                pageContainer.classList.remove('active');
                 projectDetailContainer.classList.remove('active');
-                pageContainer.classList.add('active');
+                
+                if (pageId === 'page-hero') {
+                    heroContainer.classList.add('active');
+                } else {
+                    pageContainer.classList.add('active');
+                }
 
                 document.querySelectorAll('#page-container .page').forEach(p => p.classList.remove('active'));
                 const activePage = document.getElementById(pageId);
-                if (activePage) {
-                    activePage.classList.add('active');
-                }
+                if (activePage) activePage.classList.add('active');
                 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -250,6 +260,7 @@
                 const project = config.projects.find(p => p.id === projectId);
                 if (!project) return;
                 
+                heroContainer.classList.remove('active');
                 pageContainer.classList.remove('active');
                 projectDetailContainer.classList.add('active');
 
@@ -312,6 +323,10 @@
             
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                if (config.formspreeEndpoint.includes("your_unique_code")) {
+                    alert("Please replace 'your_unique_code' in the config object with your real Formspree endpoint!");
+                    return;
+                }
                 const formData = new FormData(contactForm);
                 fetch(contactForm.action, {
                     method: 'POST',
