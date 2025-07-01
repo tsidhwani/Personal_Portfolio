@@ -18,6 +18,9 @@ body { font-family: var(--font-primary); margin: 0; background-color: var(--bg-c
 header { background-color: rgba(0, 0, 28, 0.85); backdrop-filter: blur(10px); position: sticky; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid var(--border-color); }
 nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; max-width: 1400px; margin: 0 auto; }
 .logo { font-size: 1.75rem; font-weight: 700; text-decoration: none; color: var(--text-color); }
+.social-links-header { display: flex; gap: 1.5rem; position: absolute; left: 50%; transform: translateX(-50%); }
+.social-links-header a { color: #a0a0c0; text-decoration: none; font-size: 1.25rem; transition: color 0.3s ease, transform 0.3s ease; }
+.social-links-header a:hover { color: var(--text-color); transform: scale(1.1); }
 .nav-menu { display: flex; gap: 3rem; }
 .nav-link { text-decoration: none; color: #a0a0c0; font-weight: 400; transition: color 0.3s ease; font-size: 1.1rem; font-family: var(--font-secondary); position: relative; padding-bottom: 5px; background: none; border: none; cursor: pointer; }
 .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: var(--gradient-start); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out; }
@@ -27,7 +30,9 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 /* --- PAGE CONTAINER & VIEW LOGIC (CORRECTED) --- */
 .page { display: none; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s ease-in-out; }
 .page.active { display: block; }
-#project-detail-container { display: none; } /* Hide detail view by default */
+#page-container.active { display: block; }
+#project-detail-container { display: none; }
+#project-detail-container.active { display: block; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -37,7 +42,9 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 #hero-name { font-size: clamp(3rem, 10vw, 6rem); margin: 0; line-height: 1.1; font-weight: 700; background: linear-gradient(90deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end)); -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; }
 #hero-title { font-size: clamp(1.2rem, 3vw, 1.5rem); font-family: var(--font-secondary); color: #b1d7ff; margin: 1rem 0 2.5rem 0; max-width: 600px; }
 .btn { font-family: var(--font-secondary); text-decoration: none; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 700; transition: all 0.3s ease; border: 2px solid var(--gradient-start); color: var(--gradient-start); background: transparent; cursor: pointer; }
-.btn:hover { background-color: var(--gradient-start); color: var(--bg-color); box-shadow: 0 5px 20px rgba(72, 192, 236, 0.2); transform: translateY(-3px); }
+.btn.secondary { border-color: #a0a0c0; color: #a0a0c0; }
+.btn:hover { background-color: var(--gradient-start); color: var(--bg-color); box-shadow: 0 5px 20px rgba(72, 192, 236, 0.2); border-color: var(--gradient-start); }
+.btn.secondary:hover { background-color: #a0a0c0; color: var(--bg-color); border-color: #a0a0c0; }
 
 h2 { text-align: center; margin-bottom: 4rem; font-size: clamp(2.5rem, 5vw, 3.5rem); position: relative; font-weight: 700; }
 h2::after { content: ''; display: block; width: 80px; height: 4px; background: linear-gradient(to right, var(--gradient-start), var(--gradient-mid)); margin: 0.75rem auto 0; border-radius: 2px; }
@@ -51,7 +58,6 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 .project-info h3 { font-size: clamp(2rem, 5vw, 3rem); margin: 0; color: white; line-height: 1.2; }
 
 /* --- PROJECT DETAIL (CASE STUDY) PAGE --- */
-#project-detail-container { animation: fadeIn 0.5s ease-in-out; }
 .project-detail-content { max-width: 900px; margin: 0 auto; padding: 6rem 2rem; }
 .back-button { background: none; border: 1px solid var(--border-color); color: var(--text-color); font-family: var(--font-secondary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; margin-bottom: 2rem; transition: all 0.3s ease; }
 .back-button:hover { border-color: var(--gradient-start); color: var(--gradient-start); }
@@ -67,7 +73,7 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 .detail-body h2::after { display: none; }
 .detail-section h3 { font-size: 1.5rem; color: var(--gradient-start); margin-top: 2.5rem; }
 .detail-section img { width: 100%; border-radius: 8px; margin-top: 1rem; }
-.detail-body .btn { display: inline-block; margin-top: 3rem; }
+.detail-buttons { display: flex; gap: 1rem; margin-top: 3rem; }
 
 /* --- ABOUT PAGE --- */
 .about-container { display: flex; align-items: flex-start; gap: 4rem; max-width: 1000px; margin: 0 auto; }
@@ -90,7 +96,7 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 
 /* --- RESUME PAGE --- */
 .resume-actions { text-align: center; margin-bottom: 2rem; }
-.resume-viewer-container { width: 100%; max-width: 850px; height: 1100px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+.resume-viewer-container { width: 100%; max-width: 850px; height: 1100px; margin: 0 auto; border-radius: 8px; overflow: hidden; background: #fff; }
 #resume-embed { width: 100%; height: 100%; border: none; }
 
 /* --- VOLUNTEER PAGE --- */
@@ -115,6 +121,9 @@ h2::after { content: ''; display: block; width: 80px; height: 4px; background: l
 footer { text-align: center; padding: 3rem 2rem; font-family: var(--font-secondary); color: #aaa; }
 
 /* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1100px) {
+    .social-links-header { display: none; } /* Hide social links in nav on smaller screens to prevent clutter */
+}
 @media (max-width: 992px) {
     .about-container { flex-direction: column; align-items: center; }
     .about-image { margin-bottom: 2rem; }
@@ -124,4 +133,6 @@ footer { text-align: center; padding: 3rem 2rem; font-family: var(--font-seconda
 }
 @media (max-width: 768px) {
     .nav-menu { display: none; }
+    nav { justify-content: center; }
+    .logo { position: absolute; left: 2rem; }
 }
