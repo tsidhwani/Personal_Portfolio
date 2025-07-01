@@ -64,7 +64,8 @@
                                 image: "https://placehold.co/800x400/0d0d2b/6496ec?text=Another+Project+Image"
                             }
                         ],
-                        liveLink: "https://slavesocieties.org/"
+                        liveLink: "https://slavesocieties.org/",
+                        githubLink: null
                     }
                 },
                 {
@@ -79,9 +80,10 @@
                         role: "Creator & Developer",
                         techStack: ["Python"],
                         sections: [
-                           { title: "The Concept", text: "The core idea was to build a tool that adapts to the user's knowledge, reinforcing concepts they struggle with while quickly moving past ones they've mastered. The binary decision tree was the perfect data structure for this. "}
+                           { title: "The Concept", text: "The core idea was to build a tool that adapts to the user's knowledge, reinforcing concepts they struggle with while quickly moving past ones they've mastered. The binary decision tree was the perfect data structure for this."}
                         ],
-                        liveLink: null
+                        liveLink: null,
+                        githubLink: "https://github.com/tsidhwani/Personal_Projects"
                     }
                 },
                 {
@@ -98,7 +100,8 @@
                         sections: [
                            { title: "The Goal", text: "Our objective was to raise over $25,000 to provide a top-tier experience for hundreds of student hackers, covering everything from food and prizes to travel reimbursements."}
                         ],
-                        liveLink: null
+                        liveLink: "https://vandyhacks.org/",
+                        githubLink: null
                     }
                 }
             ],
@@ -117,9 +120,10 @@
         <header>
             <nav>
                 <a href="#" class="logo nav-link" data-page="page-hero"></a>
+                <div class="social-links-header" id="social-links-header"></div>
                 <div class="nav-menu">
                     <a href="#" class="nav-link" data-page="page-work">Work</a>
-                    <a href="#" class="nav-link" data-page="page-volunteer">Volunteer</a>
+                    <a href="#" class="nav-link" data-page="page-volunteering">Volunteering</a>
                     <a href="#" class="nav-link" data-page="page-resume">Resume</a>
                     <a href="#" class="nav-link" data-page="page-about">About</a>
                     <a href="#" class="nav-link" data-page="page-contact">Contact</a>
@@ -129,7 +133,7 @@
 
         <main id="main-content">
             <!-- This container holds all primary pages -->
-            <div id="page-container">
+            <div id="page-container" class="active">
                 <section id="page-hero" class="page">
                     <div class="hero-text">
                         <h1 id="hero-name"></h1>
@@ -143,8 +147,8 @@
                     <div class="project-grid" id="project-list"></div>
                 </section>
 
-                <section id="page-volunteer" class="page">
-                    <h2>Community & Volunteer Work</h2>
+                <section id="page-volunteering" class="page">
+                    <h2>Community & Volunteering</h2>
                     <div class="volunteer-grid" id="volunteer-list"></div>
                 </section>
 
@@ -221,27 +225,24 @@
             const successMessage = document.getElementById('form-success-message');
 
             function showPage(pageId) {
-                // Hide all main pages and the project detail page
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                projectDetailContainer.style.display = 'none';
-                pageContainer.style.display = 'block';
+                projectDetailContainer.classList.remove('active');
+                pageContainer.classList.add('active');
 
-                // Show the requested page
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 const activePage = document.getElementById(pageId);
                 if (activePage) {
                     activePage.classList.add('active');
                 }
                 
-                // Update nav link styles
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.dataset.page === pageId) link.classList.add('active');
                 });
                 
                 if (pageId === 'page-hero') {
-                     document.querySelector('.logo.nav-link').classList.remove('active');
+                    document.querySelector('.logo.nav-link').classList.remove('active');
                 } else {
-                     document.querySelector('.logo.nav-link').classList.add('active');
+                    document.querySelector('.logo.nav-link').classList.add('active');
                 }
             }
             
@@ -249,8 +250,8 @@
                 const project = config.projects.find(p => p.id === projectId);
                 if (!project) return;
                 
-                pageContainer.style.display = 'none'; // Hide main page container
-                projectDetailContainer.style.display = 'block'; // Show project detail container
+                pageContainer.classList.remove('active');
+                projectDetailContainer.classList.add('active');
 
                 let techStackHtml = project.details.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
                 let sectionsHtml = project.details.sections.map(section => `
@@ -261,6 +262,14 @@
                     </div>
                 `).join('');
                 
+                let buttonsHtml = '';
+                if (project.details.liveLink) {
+                    buttonsHtml += `<a href="${project.details.liveLink}" class="btn" target="_blank">View Live Site</a>`;
+                }
+                if (project.details.githubLink) {
+                    buttonsHtml += `<a href="${project.details.githubLink}" class="btn secondary" target="_blank">View on GitHub</a>`;
+                }
+
                 projectDetailContainer.innerHTML = `
                     <div class="project-detail-content">
                         <button class="back-button">&larr; Back to Work</button>
@@ -275,7 +284,7 @@
                             <h2>Overview</h2>
                             <p>${project.details.overview}</p>
                             ${sectionsHtml}
-                            ${project.details.liveLink ? `<a href="${project.details.liveLink}" class="btn" target="_blank">View Live Site</a>` : ''}
+                            <div class="detail-buttons">${buttonsHtml}</div>
                         </div>
                     </div>
                 `;
@@ -286,11 +295,11 @@
                     showPage('page-work');
                 });
 
-                // Set 'Work' tab as active
-                 navLinks.forEach(link => {
+                navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.dataset.page === 'page-work') link.classList.add('active');
                 });
+                document.querySelector('.logo.nav-link').classList.add('active');
             }
 
             navLinks.forEach(link => {
@@ -326,8 +335,15 @@
             document.getElementById('headshot-img').src = config.headshot;
             document.getElementById('about-story').textContent = config.about.story;
             document.getElementById('download-resume-link').href = config.resumePDF;
-            document.getElementById('resume-embed').src = `${config.resumePDF}#toolbar=0&navpanes=0&scrollbar=0`;
+            document.getElementById('resume-embed').src = `${config.resumePDF}#view=FitH&scrollbar=0&toolbar=0&statusbar=0`;
             contactForm.action = config.formspreeEndpoint;
+
+            const socialLinksHeader = document.getElementById('social-links-header');
+            socialLinksHeader.innerHTML = `
+                <a href="${config.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="${config.github}" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="${config.email}" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            `;
             
             const capabilitiesList = document.getElementById('capabilities-list');
             config.about.capabilities.forEach(cap => capabilitiesList.innerHTML += `<div class="capability"><div class="cap-icon"><i class="${cap.icon}"></i></div><div class="cap-text"><h3>${cap.title}</h3><p>${cap.description}</p></div></div>`);
