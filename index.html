@@ -23,7 +23,6 @@
             email: "mailto:tapan.sidhwani@gmail.com",
             headshot: "TapanHeadshot.jpg",
             resumePDF: "SidhwaniResume4-22-25.pdf",
-            // UPDATED: Formspree endpoint is now correct
             formspreeEndpoint: "https://formspree.io/f/xnnvldlv",
             
             about: {
@@ -57,14 +56,14 @@
                             {
                                 title: "The Challenge: Deciphering History",
                                 text: "Our main obstacle was the variability and degradation of historical handwritten text. Standard OCR tools fail on such documents. We needed a custom solution to accurately segment text lines and prepare them for future transcription models.",
-                                image: "https://placehold.co/800x400/0d0d2b/b45edc?text=Data+Visualization"
+                                // UPDATED: Image path corrected
+                                image: "SSDA_Example_Image_Processing.png" 
                             },
                             {
                                 title: "My Solution: A Custom Classifier",
                                 text: "I spearheaded the development of a classifier model that could distinguish between handwritten text, printed text, and noise. I trained this model on a dataset of over 100,000 images, fine-tuning it to achieve an 85% validation accuracy. This model served as a crucial first step in the data processing pipeline, significantly improving the quality of the data fed into subsequent analysis tools.",
                                 image: null
                             },
-                            // NEW: Code snippet section
                             {
                                 title: "Code Implementation",
                                 text: "This Python script showcases the core logic for data preparation and model training. It uses Scikit-learn to process images, split the data, and run a grid search to find the optimal parameters for an SVC classifier.",
@@ -122,9 +121,10 @@ print(f'{score * 100}% of samples were correctly classified')`
                     id: "project-flowchart",
                     title: "Flow Chart Study Tool",
                     category: "Python Development",
-                    image: "https://placehold.co/800x600/0d0d2b/b45edc?text=Project+Visual",
+                    // UPDATED: Background image
+                    image: "Flow_Chart.jpg",
                     details: {
-                        headerImage: "https://placehold.co/1200x600/0d0d2b/b45edc?text=Flow+Chart+Tool",
+                        headerImage: "Flow_Chart.jpg",
                         title: "Rethinking Study Habits with Python",
                         overview: "This project was born from a desire to make studying more interactive and effective. I created a Python-based decision tree tool that guides users through study material in a question-and-answer format, boosting engagement and knowledge retention.",
                         role: "Creator & Developer",
@@ -140,9 +140,10 @@ print(f'{score * 100}% of samples were correctly classified')`
                     id: "project-vandyhacks",
                     title: "VandyHacks Sponsorship",
                     category: "Business & Strategy",
-                    image: "https://placehold.co/800x600/0d0d2b/6496ec?text=Project+Visual",
+                    // UPDATED: Background image
+                    image: "Vandy_Hacks.jpg",
                     details: {
-                        headerImage: "https://placehold.co/1200x600/0d0d2b/6496ec?text=VandyHacks",
+                        headerImage: "Vandy_Hacks.jpg",
                         title: "Fueling Innovation Through Partnerships",
                         overview: "As a member of the VandyHacks sponsorship committee, my role was to build relationships with tech companies to secure funding for one of the largest hackathons in the South. This involved outreach, negotiation, and ensuring sponsors had a valuable experience.",
                         role: "Sponsorship Committee Member",
