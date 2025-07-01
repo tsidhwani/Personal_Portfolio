@@ -28,12 +28,14 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .nav-link:hover, .nav-link.active { color: var(--text-color); }
 
 /* --- PAGE CONTAINER & VIEW LOGIC (CORRECTED) --- */
+#hero-container, #page-container, #project-detail-container {
+    display: none; /* Hide all containers by default */
+}
+#hero-container.active, #page-container.active, #project-detail-container.active {
+    display: block; /* Show only the active container */
+}
 .page { display: none; padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s ease-in-out; }
 .page.active { display: block; }
-#page-container { display: none; }
-#page-container.active { display: block; }
-#project-detail-container { display: none; }
-#project-detail-container.active { display: block; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
